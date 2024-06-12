@@ -23,7 +23,7 @@ _$RestaurantModelImpl _$$RestaurantModelImplFromJson(
       coordinates: json['coordinates'] == null
           ? null
           : Coordinates.fromJson(json['coordinates'] as Map<String, dynamic>),
-      transactions: json['transactions'] as List<dynamic>,
+      transactions: json['transactions'] as List<dynamic>?,
       price: json['price'] as String?,
       location: json['location'] == null
           ? null

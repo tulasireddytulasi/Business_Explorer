@@ -30,7 +30,7 @@ mixin _$RestaurantModel {
   List<Category>? get categories => throw _privateConstructorUsedError;
   double? get rating => throw _privateConstructorUsedError;
   Coordinates? get coordinates => throw _privateConstructorUsedError;
-  List<dynamic> get transactions => throw _privateConstructorUsedError;
+  List<dynamic>? get transactions => throw _privateConstructorUsedError;
   String? get price => throw _privateConstructorUsedError;
   Location? get location => throw _privateConstructorUsedError;
   String? get phone => throw _privateConstructorUsedError;
@@ -60,7 +60,7 @@ abstract class $RestaurantModelCopyWith<$Res> {
       List<Category>? categories,
       double? rating,
       Coordinates? coordinates,
-      List<dynamic> transactions,
+      List<dynamic>? transactions,
       String? price,
       Location? location,
       String? phone,
@@ -94,7 +94,7 @@ class _$RestaurantModelCopyWithImpl<$Res, $Val extends RestaurantModel>
     Object? categories = freezed,
     Object? rating = freezed,
     Object? coordinates = freezed,
-    Object? transactions = null,
+    Object? transactions = freezed,
     Object? price = freezed,
     Object? location = freezed,
     Object? phone = freezed,
@@ -142,10 +142,10 @@ class _$RestaurantModelCopyWithImpl<$Res, $Val extends RestaurantModel>
           ? _value.coordinates
           : coordinates // ignore: cast_nullable_to_non_nullable
               as Coordinates?,
-      transactions: null == transactions
+      transactions: freezed == transactions
           ? _value.transactions
           : transactions // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<dynamic>?,
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -213,7 +213,7 @@ abstract class _$$RestaurantModelImplCopyWith<$Res>
       List<Category>? categories,
       double? rating,
       Coordinates? coordinates,
-      List<dynamic> transactions,
+      List<dynamic>? transactions,
       String? price,
       Location? location,
       String? phone,
@@ -247,7 +247,7 @@ class __$$RestaurantModelImplCopyWithImpl<$Res>
     Object? categories = freezed,
     Object? rating = freezed,
     Object? coordinates = freezed,
-    Object? transactions = null,
+    Object? transactions = freezed,
     Object? price = freezed,
     Object? location = freezed,
     Object? phone = freezed,
@@ -295,10 +295,10 @@ class __$$RestaurantModelImplCopyWithImpl<$Res>
           ? _value.coordinates
           : coordinates // ignore: cast_nullable_to_non_nullable
               as Coordinates?,
-      transactions: null == transactions
+      transactions: freezed == transactions
           ? _value._transactions
           : transactions // ignore: cast_nullable_to_non_nullable
-              as List<dynamic>,
+              as List<dynamic>?,
       price: freezed == price
           ? _value.price
           : price // ignore: cast_nullable_to_non_nullable
@@ -327,22 +327,22 @@ class __$$RestaurantModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$RestaurantModelImpl implements _RestaurantModel {
   const _$RestaurantModelImpl(
-      {required this.id,
-      required this.alias,
-      required this.name,
-      required this.image_url,
-      required this.is_closed,
-      required this.url,
-      required this.review_count,
-      required final List<Category>? categories,
-      required this.rating,
-      required this.coordinates,
-      required final List<dynamic> transactions,
-      required this.price,
-      required this.location,
-      required this.phone,
-      required this.display_phone,
-      required this.distance})
+      {this.id,
+      this.alias,
+      this.name,
+      this.image_url,
+      this.is_closed,
+      this.url,
+      this.review_count,
+      final List<Category>? categories,
+      this.rating,
+      this.coordinates,
+      final List<dynamic>? transactions,
+      this.price,
+      this.location,
+      this.phone,
+      this.display_phone,
+      this.distance})
       : _categories = categories,
         _transactions = transactions;
 
@@ -377,12 +377,14 @@ class _$RestaurantModelImpl implements _RestaurantModel {
   final double? rating;
   @override
   final Coordinates? coordinates;
-  final List<dynamic> _transactions;
+  final List<dynamic>? _transactions;
   @override
-  List<dynamic> get transactions {
+  List<dynamic>? get transactions {
+    final value = _transactions;
+    if (value == null) return null;
     if (_transactions is EqualUnmodifiableListView) return _transactions;
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_transactions);
+    return EqualUnmodifiableListView(value);
   }
 
   @override
@@ -471,22 +473,22 @@ class _$RestaurantModelImpl implements _RestaurantModel {
 
 abstract class _RestaurantModel implements RestaurantModel {
   const factory _RestaurantModel(
-      {required final String? id,
-      required final String? alias,
-      required final String? name,
-      required final String? image_url,
-      required final bool? is_closed,
-      required final String? url,
-      required final int? review_count,
-      required final List<Category>? categories,
-      required final double? rating,
-      required final Coordinates? coordinates,
-      required final List<dynamic> transactions,
-      required final String? price,
-      required final Location? location,
-      required final String? phone,
-      required final String? display_phone,
-      required final double? distance}) = _$RestaurantModelImpl;
+      {final String? id,
+      final String? alias,
+      final String? name,
+      final String? image_url,
+      final bool? is_closed,
+      final String? url,
+      final int? review_count,
+      final List<Category>? categories,
+      final double? rating,
+      final Coordinates? coordinates,
+      final List<dynamic>? transactions,
+      final String? price,
+      final Location? location,
+      final String? phone,
+      final String? display_phone,
+      final double? distance}) = _$RestaurantModelImpl;
 
   factory _RestaurantModel.fromJson(Map<String, dynamic> json) =
       _$RestaurantModelImpl.fromJson;
@@ -512,7 +514,7 @@ abstract class _RestaurantModel implements RestaurantModel {
   @override
   Coordinates? get coordinates;
   @override
-  List<dynamic> get transactions;
+  List<dynamic>? get transactions;
   @override
   String? get price;
   @override

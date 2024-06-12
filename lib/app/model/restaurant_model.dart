@@ -7,22 +7,22 @@ part 'restaurant_model.g.dart';
 @freezed
 class RestaurantModel with _$RestaurantModel {
   const factory RestaurantModel({
-    required String? id,
-    required String? alias,
-    required String? name,
-    required String? image_url,
-    required bool? is_closed,
-    required String? url,
-    required int? review_count,
-    required List<Category>? categories,
-    required double? rating,
-    required Coordinates? coordinates,
-    required List<dynamic> transactions,
-    required String? price,
-    required Location? location,
-    required String? phone,
-    required String? display_phone,
-    required double? distance,
+     String? id,
+     String? alias,
+     String? name,
+     String? image_url,
+     bool? is_closed,
+     String? url,
+     int? review_count,
+     List<Category>? categories,
+     double? rating,
+     Coordinates? coordinates,
+     List<dynamic>? transactions,
+     String? price,
+     Location? location,
+     String? phone,
+     String? display_phone,
+     double? distance,
   }) = _RestaurantModel;
 
   factory RestaurantModel.fromJson(Map<String, dynamic> json) =>
