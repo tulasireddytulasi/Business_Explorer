@@ -1,6 +1,8 @@
 import 'package:business_explorer/app/core/utils/app_styles.dart';
 import 'package:business_explorer/app/core/utils/color_palette.dart';
+import 'package:business_explorer/app/core/utils/common_functions.dart';
 import 'package:business_explorer/app/core/utils/constants.dart';
+import 'package:business_explorer/app/model/restaurant_model.dart';
 import 'package:business_explorer/app/widget/rating_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -8,23 +10,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 class BusinessCardWidget extends StatelessWidget {
   const BusinessCardWidget({
     super.key,
-    required this.name,
-    required this.rating,
-    required this.distance,
-    required this.imgURL,
-    required this.price,
+    required this.restaurantModel,
   });
 
-  final String name;
-  final String price;
-  final String rating;
-  final String distance;
-  final String imgURL;
+  final RestaurantModel restaurantModel;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.of(context).pushNamed('/cart'),
+      onTap: () => Navigator.of(context).pushNamed('/cart', arguments: restaurantModel),
       child: Card(
         color: Colors.white,
         elevation: 4,
@@ -36,8 +30,12 @@ class BusinessCardWidget extends StatelessWidget {
             ClipRRect(
               borderRadius: const BorderRadius.only(topRight: Radius.circular(20), topLeft: Radius.circular(20)),
               child: CachedNetworkImage(
-                imageUrl: imgURL,
+                imageUrl: restaurantModel.image_url ?? "",
+                height: 160,
+                width: double.infinity,
                 fit: BoxFit.cover,
+                color: (restaurantModel.is_closed ?? false) ? ColorPalette.grey : null,
+                colorBlendMode: (restaurantModel.is_closed ?? false) ? BlendMode.saturation : null,
                 placeholder: (context, url) => const Center(child: CircularProgressIndicator(color: Colors.green)),
                 errorWidget: (context, url, error) => const Icon(Icons.error),
               ),
@@ -53,7 +51,7 @@ class BusinessCardWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          name,
+                          restaurantModel.name ?? "",
                           softWrap: true,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 3,
@@ -67,10 +65,10 @@ class BusinessCardWidget extends StatelessWidget {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: " $distance",
+                                text: " ${getTimeAndDistance(distanceInMeters: restaurantModel.distance ?? 0)}",
                                 style: AppStyles.bodyMedium.copyWith(
                                   color: ColorPalette.grey,
-                                  fontFamily: Constants.montserratMedium,
+                                  fontFamily: Constants.montserratBold,
                                 ),
                               ),
                               TextSpan(
@@ -81,7 +79,7 @@ class BusinessCardWidget extends StatelessWidget {
                                 ),
                               ),
                               TextSpan(
-                                text: price,
+                                text: restaurantModel.price,
                                 style: AppStyles.bodyMedium.copyWith(
                                   color: ColorPalette.grey,
                                   fontFamily: Constants.montserratMedium,
@@ -95,7 +93,7 @@ class BusinessCardWidget extends StatelessWidget {
                   ),
                   Padding(
                     padding: const EdgeInsets.only(top: 4),
-                    child: RatingWidget(rating: rating),
+                    child: RatingWidget(rating: restaurantModel.rating.toString()),
                   ),
                 ],
               ),
