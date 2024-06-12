@@ -20,6 +20,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorPalette.white,
+      appBar: AppBar(
+        elevation: 1,
+        backgroundColor: ColorPalette.blueGrey200,
+        leading: const Icon(Icons.home, color: ColorPalette.white),
+        title: const Text(
+          "Business Explorer App",
+          style: TextStyle(fontSize: 18, color: ColorPalette.white),
+        ),
+      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
