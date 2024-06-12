@@ -1,3 +1,4 @@
+import 'package:business_explorer/app/core/utils/color_palette.dart';
 import 'package:business_explorer/app/model/restaurant_model.dart';
 import 'package:business_explorer/app/widget/business_card_widget.dart';
 import 'package:flutter/material.dart';
@@ -18,20 +19,29 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFFFF),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.separated(
-              separatorBuilder: (context, index) => const SizedBox(height: 6),
-              itemCount: 10,
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                return const BusinessCardWidget();
-              },
+      backgroundColor: ColorPalette.white,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            Expanded(
+              child: ListView.separated(
+                separatorBuilder: (context, index) => const SizedBox(height: 6),
+                itemCount: 10,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return const BusinessCardWidget(
+                    name: "Eleven Madison Park",
+                    price: "₹300 Rs for One",
+                    imgURL: "https://s3-media1.fl.yelpcdn.com/bphoto/iLGfPaPnRkNAxODW9PZ_Yg/o.jpg",
+                    rating: "4.3",
+                    distance: "7.4 KM",
+                  );
+                },
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
