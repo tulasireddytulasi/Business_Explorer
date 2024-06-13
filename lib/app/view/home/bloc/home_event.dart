@@ -4,7 +4,7 @@ sealed class HomeEvent extends Equatable {
   const HomeEvent();
 }
 
-final class LoadItems extends HomeEvent {
+final class LoadRestaurants extends HomeEvent {
   @override
   List<Object> get props => [];
 }

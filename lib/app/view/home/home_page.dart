@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     super.initState();
-    homeBloc.add(LoadItems());
+    homeBloc.add(LoadRestaurants());
   }
 
   @override
@@ -39,12 +39,12 @@ class _HomePageState extends State<HomePage> {
         bloc: homeBloc,
         builder: (context, state) {
           switch (state.runtimeType) {
-            case ItemsLoading:
+            case RestaurantsLoading:
               return const Center(
                 child: CircularProgressIndicator(color: ColorPalette.black),
               );
-            case ItemsLoaded:
-              final successState = state as ItemsLoaded;
+            case RestaurantsLoaded:
+              final successState = state as RestaurantsLoaded;
               List<RestaurantModel> restaurantModel = successState.businesses;
               return Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -63,14 +63,10 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               );
-            case ItemsError:
-              return const Center(
-                child: Text("Error"),
-              );
+            case RestaurantsError:
+              return const Center(child: Text("Error"));
             default:
-              return const Center(
-                child: Text("Initial"),
-              );
+              return const Center(child: Text("Initial"));
           }
         },
       ),

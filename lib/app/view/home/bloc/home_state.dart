@@ -7,10 +7,10 @@ sealed class HomeState extends Equatable {
   List<Object> get props => [];
 }
 
-class ItemsLoading extends HomeState {}
+class RestaurantsLoading extends HomeState {}
 
-class ItemsLoaded extends HomeState {
-  const ItemsLoaded({required this.businesses});
+class RestaurantsLoaded extends HomeState {
+  const RestaurantsLoaded({required this.businesses});
 
   final List<RestaurantModel> businesses;
 
@@ -18,4 +18,4 @@ class ItemsLoaded extends HomeState {
   List<Object> get props => [businesses];
 }
 
-class ItemsError extends HomeState {}
+class RestaurantsError extends HomeState {}

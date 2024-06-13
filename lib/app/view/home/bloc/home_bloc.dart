@@ -12,12 +12,12 @@ part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
-  HomeBloc() : super(ItemsLoading()) {
-    on<LoadItems>(loadItems);
+  HomeBloc() : super(RestaurantsLoading()) {
+    on<LoadRestaurants>(loadRestaurants);
   }
 
-  FutureOr<void> loadItems(LoadItems event, Emitter<HomeState> emit) async {
-    emit(ItemsLoading());
+  FutureOr<void> loadRestaurants(LoadRestaurants event, Emitter<HomeState> emit) async {
+    emit(RestaurantsLoading());
     await Future.delayed(const Duration(seconds: 1));
     try {
       Response response = await getItemsListAPI();
@@ -25,10 +25,10 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
         final yelpResponse = YelpResponse.fromJson(json.decode(response.body));
         final List<RestaurantModel> businesses = yelpResponse.businesses ?? [];
         print("businesses: ${businesses.first.name}");
-        emit(ItemsLoaded(businesses: businesses));
+        emit(RestaurantsLoaded(businesses: businesses));
       }
     } catch (e) {
-      emit(ItemsError());
+      emit(RestaurantsError());
     }
   }
 }
