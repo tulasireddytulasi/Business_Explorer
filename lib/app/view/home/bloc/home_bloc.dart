@@ -20,7 +20,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
     emit(RestaurantsLoading());
     await Future.delayed(const Duration(seconds: 1));
     try {
-      Response response = await getItemsListAPI();
+      Response response = await YelpAPIServices.getItemsListAPI();
       if (response.statusCode == 200) {
         final yelpResponse = YelpResponse.fromJson(json.decode(response.body));
         final List<RestaurantModel> businesses = yelpResponse.businesses ?? [];
