@@ -65,7 +65,7 @@ class BusinessCardWidget extends StatelessWidget {
                           text: TextSpan(
                             children: [
                               TextSpan(
-                                text: " ${getTimeAndDistance(distanceInMeters: restaurantModel.distance ?? 0)}",
+                                text: " ${getDistance(distanceInMeters: restaurantModel.distance ?? 0)} km",
                                 style: AppStyles.bodyMedium.copyWith(
                                   color: ColorPalette.grey,
                                   fontFamily: Constants.montserratBold,
@@ -79,10 +79,10 @@ class BusinessCardWidget extends StatelessWidget {
                                 ),
                               ),
                               TextSpan(
-                                text: restaurantModel.price,
+                                text: "Review count: ${restaurantModel.review_count.toString()}",
                                 style: AppStyles.bodyMedium.copyWith(
                                   color: ColorPalette.grey,
-                                  fontFamily: Constants.montserratMedium,
+                                  fontFamily: Constants.montserratBold,
                                 ),
                               ),
                             ],

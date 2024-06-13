@@ -28,11 +28,12 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         elevation: 1,
         backgroundColor: ColorPalette.blueGrey200,
-        leading: const Icon(Icons.home, color: ColorPalette.white),
+        leading: const Icon(Icons.home, color: ColorPalette.white, size: 28),
         title: const Text(
           "Yelp Business Explorer",
-          style: TextStyle(fontSize: 18, color: ColorPalette.white),
+          style: TextStyle(fontSize: 22, color: ColorPalette.white),
         ),
+        centerTitle: true,
       ),
       body: BlocBuilder<HomeBloc, HomeState>(
         bloc: homeBloc,

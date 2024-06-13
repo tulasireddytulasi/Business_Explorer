@@ -1,9 +1,12 @@
 import 'package:business_explorer/app/core/utils/color_palette.dart';
+import 'package:business_explorer/app/core/utils/common_functions.dart';
+import 'package:business_explorer/app/model/restaurant_model.dart';
 import 'package:business_explorer/app/widget/dash_line_divider_widget.dart';
 import 'package:flutter/material.dart';
 
 class ItemDetailsWidget extends StatefulWidget {
-  const ItemDetailsWidget({Key? key}) : super(key: key);
+  const ItemDetailsWidget({Key? key, required this.restaurantModel}) : super(key: key);
+  final RestaurantModel restaurantModel;
 
   @override
   State<ItemDetailsWidget> createState() => _ItemDetailsWidgetState();
@@ -25,16 +28,34 @@ class _ItemDetailsWidgetState extends State<ItemDetailsWidget> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            children: const [
-              Icon(
-                Icons.timer,
-                color: ColorPalette.green,
+            children: [
+              const Icon(
+                Icons.reviews_rounded,
+                color: ColorPalette.black,
                 size: 16,
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Text(
-                "Delivery in 31 min",
-                style: TextStyle(
+                "Review count: ${widget.restaurantModel.review_count ?? ""}",
+                style: const TextStyle(
+                    color: ColorPalette.grey, fontSize: 14, fontWeight: FontWeight.bold),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          const DashLineDivider(color: Colors.grey),
+          const SizedBox(height: 10),
+           Row(
+            children: [
+              const Icon(
+                Icons.timer,
+                color: ColorPalette.black,
+                size: 16,
+              ),
+              const SizedBox(width: 10),
+              Text(
+                "Distance of ${getDistance(distanceInMeters: widget.restaurantModel.distance ?? 0)} km",
+                style: const TextStyle(
                     color: ColorPalette.grey, fontSize: 14, fontWeight: FontWeight.bold),
               ),
             ],
@@ -56,7 +77,7 @@ class _ItemDetailsWidgetState extends State<ItemDetailsWidget> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "Delivery at Home",
+                    "Address:",
                     textAlign: TextAlign.start,
                     style: TextStyle(
                         color: ColorPalette.grey, fontSize: 14, fontWeight: FontWeight.bold),
@@ -75,16 +96,16 @@ class _ItemDetailsWidgetState extends State<ItemDetailsWidget> {
           const DashLineDivider(color: Colors.grey),
           const SizedBox(height: 10),
           Row(
-            children: const [
-              Icon(
+            children: [
+              const Icon(
                 Icons.phone_in_talk_outlined,
                 color: ColorPalette.black,
                 size: 16,
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Text(
-                "+91-8374998490",
-                style: TextStyle(
+                "Display Phone No: ${widget.restaurantModel.display_phone ?? "NA"}",
+                style: const TextStyle(
                     color: ColorPalette.grey, fontSize: 14, fontWeight: FontWeight.bold),
               ),
             ],
@@ -93,131 +114,23 @@ class _ItemDetailsWidgetState extends State<ItemDetailsWidget> {
           const DashLineDivider(color: Colors.grey),
           const SizedBox(height: 10),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
-                "Item total",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: ColorPalette.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                "₹196.00",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: ColorPalette.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              const Icon(
+                Icons.phone_in_talk_outlined,
+                color: ColorPalette.black,
+                size: 16,
+              ),
+              const SizedBox(width: 10),
               Text(
-                "Coupon - (FLAT20)",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.blue.shade800,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                "₹-80.00",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.blue.shade800,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
-                "Delivery charges",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: ColorPalette.grey1,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
-              Text(
-                "₹26.00",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: ColorPalette.grey1,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              RichText(
-                softWrap: true,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 1,
-                text: const TextSpan(
-                  children: [
-                    TextSpan(
-                      text: "Govt. taxes ",
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: ColorPalette.grey1,
-                        fontWeight: FontWeight.normal,
-                      ),
-                    ),
-                    WidgetSpan(
-                      child: Icon(
-                        Icons.info_outline,
-                        size: 16,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              const Text(
-                "₹41.21",
-                style: TextStyle(
-                  fontSize: 12,
-                  color: ColorPalette.grey1,
-                  fontWeight: FontWeight.bold,
-                ),
+                "Phone No: ${widget.restaurantModel.phone ?? "NA"}",
+                style: const TextStyle(
+                    color: ColorPalette.grey, fontSize: 14, fontWeight: FontWeight.bold),
               ),
             ],
           ),
           const SizedBox(height: 10),
           const DashLineDivider(color: Colors.grey),
           const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: const [
-              Text(
-                "Grand total",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: ColorPalette.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              Text(
-                "₹183.21",
-                style: TextStyle(
-                  fontSize: 16,
-                  color: ColorPalette.black,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            ],
-          ),
         ],
       ),
     );

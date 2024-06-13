@@ -1,34 +1,30 @@
-String getTimeAndDistance({required double distanceInMeters}) {
-  //double distanceInMeters = 6288.929570044286;
+import 'package:url_launcher/url_launcher.dart';
+
+double getDistance({required double distanceInMeters}) {
   double distanceInKilometers = distanceInMeters / 1000;
   double distance = double.parse(distanceInKilometers.toStringAsFixed(2));
-  print("Distance in kilometers: $distance");
+  return distance;
+}
 
-  double speed = 40.0; // Speed in kilometers per hour
+void openMap({required double latitude, required double longitude}) async {
+  final String googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=$latitude,$longitude';
+  final String appleMapsUrl = 'https://maps.apple.com/?q=$latitude,$longitude';
 
-  double timeInHours = 0;
-  if (speed == 0) {
-    timeInHours = double.infinity; // Handle division by zero
-  }
-  timeInHours = distance / speed;
-
-  int hours = timeInHours.floor();
-  int minutes = ((timeInHours - hours) * 60).round();
-
-  String timeData = "";
-  if (hours == 0) {
-    print("Time taken: $minutes minutes");
-    timeData = "$minutes mins  .  ";
-  } else if (minutes == 0) {
-    print("Time taken: $hours hours");
-    timeData = "$hours hours  .  ";
+  if (await canLaunchUrl(Uri.parse(googleMapsUrl))) {
+    await launchUrl(Uri.parse(googleMapsUrl),  mode: LaunchMode.inAppWebView);
+  } else if (await canLaunchUrl(Uri.parse(appleMapsUrl))) {
+    await launchUrl(Uri.parse(appleMapsUrl),  mode: LaunchMode.inAppWebView);
   } else {
-    print("Time taken: $hours hours and $minutes minutes");
-    timeData = "$hours hours and $minutes mins  .  ";
+    throw 'Could not launch map URL';
   }
+}
 
-  timeData += "$distance km";
-
-  print("Time taken: $timeData");
-  return timeData;
+Future<void> openExternalLink({required String link}) async {
+  if (await canLaunchUrl(Uri.parse(link))) {
+  await launchUrl(Uri.parse(link),  mode: LaunchMode.inAppWebView);
+  } else if (await canLaunchUrl(Uri.parse(link))) {
+  await launchUrl(Uri.parse(link),  mode: LaunchMode.inAppWebView);
+  } else {
+  throw 'Could not launch map URL';
+  }
 }
